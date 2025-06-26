@@ -95,6 +95,22 @@
         >
       </div>
 
+      {% if last_terms_str %}
+        <p>
+          <strong>Last terms submitted:</strong>
+          <code id="last-terms">{{ last_terms_str }}</code>
+          <button type="button" id="copy-btn">Copy</button>
+        </p>
+        <script>
+          // copy to clipboard
+          document.getElementById('copy-btn').addEventListener('click', function() {
+            navigator.clipboard.writeText(
+              document.getElementById('last-terms').textContent
+            );
+          });
+        </script>
+      {% endif %}
+
       <div class="form-group">
         <label for="id_terms">Terms (comma-separated)</label>
         <input
@@ -118,22 +134,6 @@
 
       <button type="submit">Add Entry</button>
     </form>
-  {% endif %}
-
-  {% if last_terms_str %}
-    <p>
-      <strong>Last terms submitted:</strong>
-      <code id="last-terms">{{ last_terms_str }}</code>
-      <button type="button" id="copy-btn">Copy</button>
-    </p>
-    <script>
-      // copy to clipboard
-      document.getElementById('copy-btn').addEventListener('click', function() {
-        navigator.clipboard.writeText(
-          document.getElementById('last-terms').textContent
-        );
-      });
-    </script>
   {% endif %}
 
   <!-- 4. Recent entries table -->
