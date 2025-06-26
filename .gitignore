@@ -1,0 +1,74 @@
+# Python bytecode & cache
+*.py[cod]
+__pycache__/
+
+# Logs and translation files
+*.log
+*.pot
+*.mo
+
+# SQLite database (if used)
+db.sqlite3
+db.sqlite3-journal
+
+# Django media uploads
+media/
+
+# Virtual environment folders
+.env
+.venv/
+env/
+venv/
+
+# Django local settings
+local_settings.py
+production_settings.py
+
+# Static files (if collected locally)
+static/
+staticfiles/
+
+# IDE/editor folders & system files
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+.DS_Store
+Thumbs.db
+
+# Testing, coverage, and build artifacts
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.egg-info/
+pip-wheel-metadata/
+dist/
+build/
+*.whl
+*.egg
+*.manifest
+*.spec
+
+# Environment / packaging
+.env
+.env.bak/
+env.bak/
+__pycache__/
+
+# Celery
+celerybeat-schedule*
+celerybeat.pid
+
+# Jupyter
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Additional caches
+.mypy_cache/

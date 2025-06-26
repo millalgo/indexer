@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Book Entries</title>
+  <style>
+    /* General form styling */
+    form { margin-bottom: 2em; }
+    label { display: block; margin-bottom: 0.3em; font-weight: bold; }
+    select { width: 100%; max-width: 400px; }
+
+    /* Entries table styling */
+    table {
+      width: 100%; border-collapse: collapse; margin-top: 2em;
+    }
+    table th, table td {
+      border: 1px solid #ccc; padding: 0.5em; text-align: left;
+    }
+    table th { background: #f0f0f0; }
+
+    /* Inline form for delete & export buttons */
+    .action-form { display: inline; margin: 0; padding: 0; }
+    .action-form button {
+      background: none;
+      border: none;
+      color: #007BFF;
+      text-decoration: underline;
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+      margin-right: 0.5em;
+    }
+
+    /* Link styling */
+    .action-link { margin-right: 0.5em; }
+
+    /* Home link styling */
+    .home-link {
+      margin-bottom: 1em;
+      display: inline-block;
+      font-weight: bold;
+      text-decoration: none;
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Home link -->
+  <p>
+    <a href="http://127.0.0.1" class="home-link">&larr; Home</a>
+  </p>
+
+  <!-- Book selector -->
+  <form method="get" action="">
+    <label for="id_book">Choose a book:</label>
+    <select id="id_book" name="book_id" required>
+      <option value="" disabled {% if not selected_book %}selected{% endif %}>
+        -- Select a book --
+      </option>
+      {% for book in books %}
+        <option
+          value="{{ book.id }}"
+          {% if selected_book and book.id == selected_book.id %}selected{% endif %}
+        >
+          {{ book.title }}
+        </option>
+      {% endfor %}
+    </select>
+    <button type="submit">View Entries</button>
+  </form>
+
+  {% if selected_book %}
+    <hr>
+    <h2>Entries for “{{ selected_book.title }}”</h2>
+
+    <div class="actions">
+      <form action="{% url 'home:export_to_csv' %}" method="get">
+          <input type="hidden" name="book_id" value="{{ selected_book.id }}">
+          <button type="submit" name="export" value="csv" class="btn btn-primary">
+              Download Index (CSV)
+          </button>
+      </form>
+    </div>
+
+    {% if entries %}
+      <table>
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Term</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in entries %}
+            <tr>
+              <td>{{ entry.page }}</td>
+              <td>{{ entry.term }}</td>
+              <td>{{ entry.description }}</td>
+              <td>
+                <a
+                  href="{% url 'home:edit_entry' entry.id %}"
+                  class="action-link"
+                >Edit</a>
+                <form
+                  method="post"
+                  action="{% url 'home:delete_entry' entry.id %}"
+                  class="action-form"
+                >
+                  {% csrf_token %}
+                  <button type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No entries found for this book.</p>
+    {% endif %}
+
+  {% elif request.GET.book_id %}
+    <p><strong>Book not found.</strong> Please select a valid book above.</p>
+  {% else %}
+    <p><em>Please select a book above to view its entries.</em></p>
+  {% endif %}
+
+</body>
+</html>

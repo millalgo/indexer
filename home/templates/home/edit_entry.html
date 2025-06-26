@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Entry</title>
+  <style>
+    /* Reuse form styling from other pages */
+    form { margin-bottom: 2em; }
+    .form-group { margin-bottom: 1em; }
+    label {
+      display: block;
+      margin-bottom: 0.3em;
+      font-weight: bold;
+    }
+    input[type="number"],
+    input[type="text"],
+    textarea {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.3em;
+      box-sizing: border-box;
+    }
+    textarea { height: 120px; max-width: 600px; }
+    .actions {
+      margin-top: 1em;
+    }
+    .actions button,
+    .actions a {
+      margin-right: 1em;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Edit entry for “{{ entry.book.title }}”</h2>
+
+  <form method="post" action="">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="id_page">Page number</label>
+      <input
+        type="number"
+        id="id_page"
+        name="page"
+        value="{{ entry.page }}"
+        min="1"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="id_term">Term</label>
+      <input
+        type="text"
+        id="id_term"
+        name="term"
+        value="{{ entry.term }}"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="id_description">Description</label>
+      <textarea
+        id="id_description"
+        name="description"
+        required
+      >{{ entry.description }}</textarea>
+    </div>
+
+    <div class="actions">
+      <button type="submit">Save Changes</button>
+      <a
+        href="{% url 'home:book_entries' %}?book_id={{ entry.book.id }}"
+      >Cancel</a>
+    </div>
+  </form>
+
+</body>
+</html>

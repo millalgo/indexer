@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Books &amp; Index</title>
+  <style>
+    /* General form styling */
+    form { margin-bottom: 2em; }
+
+    /* Entry form layout */
+    form.entry-form .form-group { margin-bottom: 1em; }
+    form.entry-form label {
+      display: block;
+      margin-bottom: 0.3em;
+      font-weight: bold;
+    }
+    form.entry-form input[type="number"] {
+      width: 100%; max-width: 200px;
+    }
+    form.entry-form input[type="text"] {
+      width: 100%; max-width: 400px;
+    }
+    form.entry-form textarea {
+      width: 100%; max-width: 600px;
+      height: 150px;
+    }
+
+    /* Recent entries table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2em;
+    }
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      text-align: left;
+    }
+    table th { background: #f0f0f0; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Add new Book -->
+  <form method="post" action="">
+    {% csrf_token %}
+    <label for="id_title">New Book:</label>
+    <input
+      type="text"
+      id="id_title"
+      name="title"
+      placeholder="Enter book title"
+      required
+    >
+    <button type="submit">Add Book</button>
+  </form>
+
+  <hr>
+
+  <!-- 2. Select existing Book -->
+  <form method="get" action="">
+    <label for="id_book">Choose a book:</label>
+    <select id="id_book" name="book_id" required>
+      <option value="" disabled {% if not selected_book %}selected{% endif %}>
+        -- Select --
+      </option>
+      {% for book in books %}
+        <option
+          value="{{ book.id }}"
+          {% if selected_book and book.id == selected_book.id %}selected{% endif %}
+        >
+          {{ book.title }}
+        </option>
+      {% endfor %}
+    </select>
+    <button type="submit">Go</button>
+  </form>
+
+  {% if selected_book %}
+    <hr>
+
+    <!-- 3. Add IndexEntry for the selected Book -->
+    <h2>Add entry for “{{ selected_book.title }}”</h2>
+    <form method="post" action="" class="entry-form">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="id_page">Page number</label>
+        <input
+          type="number"
+          id="id_page"
+          name="page"
+          min="1"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="id_terms">Terms (comma-separated)</label>
+        <input
+          type="text"
+          id="id_terms"
+          name="terms"
+          placeholder="e.g. authentication, auth-token, login"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="id_description">Description</label>
+        <textarea
+          id="id_description"
+          name="description"
+          placeholder="Enter description (required)"
+          required
+        ></textarea>
+      </div>
+
+      <button type="submit">Add Entry</button>
+    </form>
+  {% endif %}
+
+  {% if last_terms_str %}
+    <p>
+      <strong>Last terms submitted:</strong>
+      <code id="last-terms">{{ last_terms_str }}</code>
+      <button type="button" id="copy-btn">Copy</button>
+    </p>
+    <script>
+      // copy to clipboard
+      document.getElementById('copy-btn').addEventListener('click', function() {
+        navigator.clipboard.writeText(
+          document.getElementById('last-terms').textContent
+        );
+      });
+    </script>
+  {% endif %}
+
+  <!-- 4. Recent entries table -->
+  {% if recent_entries %}
+    <hr>
+    <h2>5 Most Recent Entries</h2>
+    <p>
+      <a href="{% url 'home:book_entries' %}">
+        View all entries by book
+      </a>
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Book</th>
+          <th>Page</th>
+          <th>Term</th>
+          <th>Description</th>
+          <th>Added</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in recent_entries %}
+          <tr>
+            <td>{{ entry.book.title }}</td>
+            <td>{{ entry.page }}</td>
+            <td>{{ entry.term }}</td>
+            <td>{{ entry.description }}</td>
+            <td>{{ entry.created_at|date:"Y-m-d H:i" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No entries yet.</p>
+  {% endif %}
+
+</body>
+</html>
