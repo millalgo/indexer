@@ -4,6 +4,10 @@ A lightweight, container-based web app for organizing and tracking SANS course m
 
 ---
 
+![Main dashboard](docs/media/images/screenshot.png)
+
+---
+
 ## ✨ Key Points
 
 | Component                            | Purpose                                                                         |
