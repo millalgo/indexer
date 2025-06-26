@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Math-Symbol Clipboard Grid</title>
+
+<style>
+  body{font-family:sans-serif;margin:2rem;background:#f7f9fc;color:#222;}
+  h2{margin-bottom:1rem;}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(10,60px);
+    gap:10px;
+    width:max-content;
+  }
+  .symbol{
+    width:60px;height:60px;
+    border:1px solid #ccd3da;border-radius:6px;
+    background:#fff;cursor:pointer;
+    font-size:28px;display:flex;
+    align-items:center;justify-content:center;
+    transition:background .2s;
+  }
+  .symbol:hover{background:#e8f1ff;}
+  .copied{background:#c8f7d4;}
+</style>
+</head>
+<body>
+
+<h2>Math Symbols – click to copy</h2>
+
+<div class="grid">
+  <!--  Row 1  -->
+  <button class="symbol" data-symbol="π">π</button>
+  <button class="symbol" data-symbol="∞">∞</button>
+  <button class="symbol" data-symbol="Σ">Σ</button>
+  <button class="symbol" data-symbol="√">√</button>
+  <button class="symbol" data-symbol="∛">∛</button>
+  <button class="symbol" data-symbol="∜">∜</button>
+  <button class="symbol" data-symbol="∫">∫</button>
+  <button class="symbol" data-symbol="∬">∬</button>
+  <button class="symbol" data-symbol="∭">∭</button>
+  <button class="symbol" data-symbol="∮">∮</button>
+
+  <!--  Row 2  -->
+  <button class="symbol" data-symbol="∯">∯</button>
+  <button class="symbol" data-symbol="∰">∰</button>
+  <button class="symbol" data-symbol="∀">∀</button>
+  <button class="symbol" data-symbol="ℂ">ℂ</button>
+  <button class="symbol" data-symbol="∂">∂</button>
+  <button class="symbol" data-symbol="∃">∃</button>
+  <button class="symbol" data-symbol="∄">∄</button>
+  <button class="symbol" data-symbol="∅">∅</button>
+  <button class="symbol" data-symbol="Δ">Δ</button>
+  <button class="symbol" data-symbol="∇">∇</button>
+
+  <!--  Row 3  -->
+  <button class="symbol" data-symbol="≈">≈</button>
+  <button class="symbol" data-symbol="≠">≠</button>
+  <button class="symbol" data-symbol="≡">≡</button>
+  <button class="symbol" data-symbol="≅">≅</button>
+  <button class="symbol" data-symbol="≃">≃</button>
+  <button class="symbol" data-symbol="∝">∝</button>
+  <button class="symbol" data-symbol="÷">÷</button>
+  <button class="symbol" data-symbol="±">±</button>
+  <button class="symbol" data-symbol="×">×</button>
+  <button class="symbol" data-symbol="⊕">⊕</button>
+</div>
+
+<script>
+  // Copy symbol text to clipboard
+  document.querySelectorAll('.symbol').forEach(btn=>{
+    btn.addEventListener('click', async () => {
+      const sym = btn.dataset.symbol;
+      try {
+        await navigator.clipboard.writeText(sym);          // modern API
+      } catch {
+        // fallback for older browsers
+        const t = document.createElement('textarea');
+        t.value = sym; document.body.appendChild(t);
+        t.select(); document.execCommand('copy');
+        document.body.removeChild(t);
+      }
+      btn.classList.add('copied');
+      setTimeout(()=>btn.classList.remove('copied'), 600);
+    });
+  });
+</script>
+
+</body>
+</html>

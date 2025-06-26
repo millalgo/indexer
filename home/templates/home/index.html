@@ -37,6 +37,10 @@
       text-align: left;
     }
     table th { background: #f0f0f0; }
+    .symbol-link{
+      display:block;         /* link below label, above textarea */
+      margin:0 0 .4em 0;     /* small spacer */
+    }
   </style>
 </head>
 <body>
@@ -124,6 +128,12 @@
 
       <div class="form-group">
         <label for="id_description">Description</label>
+
+        <a href="{% url 'home:symbols' %}" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="symbol-link">Copy/Paste Symbols Sheet</a>
+        
         <textarea
           id="id_description"
           name="description"

@@ -5,7 +5,8 @@ from .views import (homepage,
                     book_entries, 
                     edit_entry, 
                     delete_entry,
-                    export_to_csv)
+                    export_to_csv,
+                    symbols)
 
 app_name = 'home'
 urlpatterns = [
@@ -26,4 +27,9 @@ urlpatterns = [
         export_to_csv,
         name='export_to_csv'
     ),
+    path(
+        'symbols/',
+        symbols,
+        name='symbols'
+    )
 ]

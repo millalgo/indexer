@@ -157,3 +157,6 @@ def export_to_csv(request):
             pass
     
     return redirect(f"{reverse('home:book_entries')}?book_id={book_id}")
+
+def symbols(request):
+    return render(request, 'home/symbols.html')
