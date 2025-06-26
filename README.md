@@ -1,6 +1,6 @@
 ### Indexer — Dockerized Django Stack
 
-A lightweight, container-based web app for organizing and tracking SANS course material indexes.
+A lightweight, container-based web app for organizing and tracking course material indexes.
 
 ---
 
@@ -31,8 +31,8 @@ cp .env.example .env   # add secrets if needed
 docker compose up --build
 ```
 
-* **Web app:** [http://127.0.0.1](http://127.0.0.1)
-* **code-server:** [http://127.0.0.1:8443](http://127.0.0.1:8443) (login token printed on first run)
+* **Web app:** <a href="http://127.0.0.1" target="_blank" rel="noopener noreferrer">http://127.0.0.1</a>
+* **code-server:** <a href="http://127.0.0.1:8443" target="_blank" rel="noopener noreferrer">http://127.0.0.1:8443</a> (login token printed on first run)
 
 The `entrypoint.sh` script waits for Postgres, runs migrations, collects static files, and starts Gunicorn automatically.
 
@@ -62,19 +62,18 @@ requirements.txt      # Python dependencies
 
 ---
 
-## 🐞 Contributing / Support
+## 🚧 Upcoming Features
 
-* **Issues & Feature Requests:** Use the repo’s **Issues** tab.
-* **Pull Requests:** Welcome! Please keep commits scoped and well-commented.
+| Feature                    | What it will do                                                                                                                                                                       | Status     |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **Master Index Generator** | Automatically merge all per-chapter indexes into a single, searchable master file (CSV + PDF). Will also support scheduled re-builds after every import.                              | 🎯 Planned |
+| **Book Color Selector**    | Lets you assign and persist a color theme for each course book/binder. Provides a small palette-picker UI and stores the choice in user settings for consistent visuals across pages. | 🎯 Planned |
 
 ---
 
-## 🚧 Upcoming Features
+## ⚠️ Deployment & Security
 
-| Feature | What it will do | Status |
-|---------|-----------------|--------|
-| **Master Index Generator** | Automatically merge all per-chapter indexes into a single, searchable master file (CSV + PDF). Will also support scheduled re-builds after every import. | 🎯 Planned |
-| **Book Color Selector** | Lets you assign and persist a color theme for each course book/binder. Provides a small palette-picker UI and stores the choice in user settings for consistent visuals across pages. | 🎯 Planned |
+This application is intended to be **self‑hosted** on your own infrastructure. Deploying it to a public or shared hosting environment is outside its intended use and may introduce significant security risks unless you implement proper hardening measures (TLS, authentication, network isolation, etc.).
 
 ---
 
