@@ -65,6 +65,15 @@ requirements.txt      # Python dependencies
 
 ---
 
+## 🚧 Upcoming Features
+
+| Feature | What it will do | Status |
+|---------|-----------------|--------|
+| **Master Index Generator** | Automatically merge all per-chapter indexes into a single, searchable master file (CSV + PDF). Will also support scheduled re-builds after every import. | 🎯 Planned |
+| **Book Color Selector** | Lets you assign and persist a color theme for each course book/binder. Provides a small palette-picker UI and stores the choice in user settings for consistent visuals across pages. | 🎯 Planned |
+
+---
+
 ## 🛡️ License
 
 Apache License 2.0 — see [`LICENSE`](LICENSE) for details.
