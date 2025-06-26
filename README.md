@@ -1,6 +1,6 @@
-### SANS SEC595 Indexer — Dockerized Django Stack
+### Indexer — Dockerized Django Stack
 
-A lightweight, container-based web app for organizing and tracking SANS SEC595 course material indexes.
+A lightweight, container-based web app for organizing and tracking SANS course material indexes.
 
 ---
 
@@ -20,8 +20,8 @@ A lightweight, container-based web app for organizing and tracking SANS SEC595 c
 
 ```bash
 # Prerequisites: Docker & Docker Compose installed
-git clone https://github.com/<your-org>/sec595-indexer.git
-cd sec595-indexer
+git clone https://github.com/millalgo/indexer.git
+cd indexer
 cp .env.example .env   # add secrets if needed
 
 docker compose up --build
