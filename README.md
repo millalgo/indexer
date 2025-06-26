@@ -31,8 +31,8 @@ cp .env.example .env   # add secrets if needed
 docker compose up --build
 ```
 
-* **Web app:** [http://127.0.0.1](http://127.0.0.1)
-* **code-server:** [http://127.0.0.1:8443](http://127.0.0.1:8443) (login token printed on first run)
+* **Web app:** <a href="http://127.0.0.1" target="_blank" rel="noopener noreferrer">http://127.0.0.1</a>
+* **code-server:** <a href="http://127.0.0.1:8443" target="_blank" rel="noopener noreferrer">http://127.0.0.1:8443</a> (login token printed on first run)
 
 The `entrypoint.sh` script waits for Postgres, runs migrations, collects static files, and starts Gunicorn automatically.
 
