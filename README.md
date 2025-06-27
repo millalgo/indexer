@@ -68,6 +68,8 @@ requirements.txt      # Python dependencies
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | **Master Index Generator** | Automatically merge all per-chapter indexes into a single, searchable master file (CSV + PDF). Will also support scheduled re-builds after every import.                              | 🎯 Planned |
 | **Book Color Selector**    | Lets you assign and persist a color theme for each course book/binder. Provides a small palette-picker UI and stores the choice in user settings for consistent visuals across pages. | 🎯 Planned |
+| **Copy/Paste Symbols Page**| A utility page listing commonly used signs and symbols with one-click copy support, organized by category (arrows, math, currency, etc.). | ⚠️ In Progress |
+
 
 ---
 
