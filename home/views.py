@@ -45,6 +45,7 @@ def homepage(request):
                             description=description
                         )
                     request.session['last_terms_str'] = term_str
+                    request.session['last_page_str'] = page_str
                 except Book.DoesNotExist:
                     pass
 
@@ -58,6 +59,10 @@ def homepage(request):
     last = request.session.pop('last_terms_str', None)
     if last:
         context['last_terms_str'] = last
+
+    last_page = request.session.pop('last_page_str', None)
+    if last_page:
+        context['last_page_str'] = last_page
 
     selected_id = request.session.get('selected_book_id')
     if selected_id:

@@ -85,6 +85,23 @@
 
     <!-- 3. Add IndexEntry for the selected Book -->
     <h2>Add entry for “{{ selected_book.title }}”</h2>
+
+    {% if last_page_str %}
+      <p>
+        <strong>Last page submitted:</strong>
+        <code id="last-page">{{ last_page_str }}</code>
+        <button type="button" id="copy-page-btn">Copy</button>
+      </p>
+      <script>
+        // Copy last page to clipboard
+        document.getElementById('copy-page-btn').addEventListener('click', function() {
+          navigator.clipboard.writeText(
+            document.getElementById('last-page').textContent
+          );
+        });
+      </script>
+    {% endif %}
+
     <form method="post" action="" class="entry-form">
       {% csrf_token %}
 
