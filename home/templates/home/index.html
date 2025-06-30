@@ -93,11 +93,9 @@
         <button type="button" id="copy-page-btn">Copy</button>
       </p>
       <script>
-        // Copy last page to clipboard
+        // Fill page input with last page value
         document.getElementById('copy-page-btn').addEventListener('click', function() {
-          navigator.clipboard.writeText(
-            document.getElementById('last-page').textContent
-          );
+          document.getElementById('id_page').value = document.getElementById('last-page').textContent.trim();
         });
       </script>
     {% endif %}
@@ -123,11 +121,9 @@
           <button type="button" id="copy-btn">Copy</button>
         </p>
         <script>
-          // copy to clipboard
+          // Fill terms input with last terms
           document.getElementById('copy-btn').addEventListener('click', function() {
-            navigator.clipboard.writeText(
-              document.getElementById('last-terms').textContent
-            );
+            document.getElementById('id_terms').value = document.getElementById('last-terms').textContent.trim();
           });
         </script>
       {% endif %}
