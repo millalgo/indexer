@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Study Planner Breakdown</title>
+  <style>
+    /* General form styling */
+    form { margin-bottom: 2em; }
+
+    /* Entry form layout */
+    form.entry-form .form-group { margin-bottom: 1em; }
+    form.entry-form label {
+      display: block;
+      margin-bottom: 0.3em;
+      font-weight: bold;
+    }
+    form.entry-form input[type="number"] {
+      width: 100%; max-width: 200px;
+    }
+    form.entry-form input[type="text"] {
+      width: 100%; max-width: 400px;
+    }
+    form.entry-form textarea {
+      width: 100%; max-width: 600px;
+      height: 150px;
+    }
+
+    /* Recent entries table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2em;
+    }
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      text-align: left;
+    }
+    table th { background: #f0f0f0; }
+    .symbol-link{
+      display:block;         /* link below label, above textarea */
+      margin:0 0 .4em 0;     /* small spacer */
+    }
+  </style>
+</head>
+<body>
+
+    <h1>Study Planner</h1>
+
+    <hr>
+
+    <h2>General Details</h2>
+    
+    <!-- 1. Start Date -->
+    <form method="post" action="">
+      {% csrf_token %}
+      <label for="start_date"></label>
+      <input
+        type="text"
+        id="start_date"
+        name="start_date"
+        placeholder="Enter Start Date"
+        required
+      >
+
+    <!-- 1. End Date -->
+      <label for="end_date"></label>
+      <input
+        type="text"
+        id="end_date"
+        name="end_date"
+        placeholder="Enter End Date"
+        required
+      >
+      <button type="submit">Submit</button>
+    </form>
+
+    <p>End Date</p>
+    <p>Check box button to add / remove weekends  to total available days</p>
+    <p>Check box button to add / remove federal holidays to total available days</p>
+    <p>* Calculate Total Number of study days.</p>
+    <p>Number of pages completed per book</p>
+
+    <hr>
+
+    <h2>Book Details</h2>
+    <p>Book Name</p>
+    <p>completion progress bar</p>
+    <p>Total Page numbers</p>
+    <p>Average Pages Completed</p>
+    <p>Calculate total days to complete</p>
+    <p>Collapsable start/stop page breakdown per day</p>
+
+
+</body>
+</html>

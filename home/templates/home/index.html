@@ -169,6 +169,13 @@
         rel="noopener noreferrer"
         class="symbol-link">View all entries by book</a>
     </p>
+    <div class="actions">
+      <form action="{% url 'home:export_master_csv' %}" method="get">
+          <button type="submit" name="export" value="csv" class="btn btn-primary">
+              Download Master Index
+          </button>
+      </form>
+    </div>
     <table>
       <thead>
         <tr>

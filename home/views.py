@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 from .models import Book, IndexEntry
 import csv
+from datetime import date
 
 def homepage(request):
     """
@@ -163,5 +164,38 @@ def export_to_csv(request):
     
     return redirect(f"{reverse('home:book_entries')}?book_id={book_id}")
 
+def export_master_csv(request):
+    if request.GET.get("export") == "csv":
+        try:
+            today_str = date.today().isoformat()
+            file_name = f"master_{today_str}.csv"
+
+            # Prepare HTTP response with CSV content
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+
+            writer = csv.writer(response)
+            writer.writerow(['Book Title', 'Page', 'Term', 'Description'])
+
+            entries = IndexEntry.objects.select_related('book').order_by('term')
+
+            for entry in entries:
+                writer.writerow([
+                    entry.book.title,
+                    entry.page,
+                    entry.term,
+                    entry.description
+                ])
+
+            return response
+
+        except Exception as e:
+            return HttpResponse(f"Error occurred: {str(e)}", content_type="text/plain")
+
+    return redirect(f"{reverse('home:homepage')}")
+
 def symbols(request):
     return render(request, 'home/symbols.html')
+
+def planner(request):
+    return render(request, 'home/planner.html')
