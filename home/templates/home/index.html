@@ -42,6 +42,7 @@
       margin:0 0 .4em 0;     /* small spacer */
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 </head>
 <body>
 
@@ -169,13 +170,12 @@
         rel="noopener noreferrer"
         class="symbol-link">View all entries by book</a>
     </p>
-    <div class="actions">
-      <form action="{% url 'home:export_master_csv' %}" method="get">
-          <button type="submit" name="export" value="csv" class="btn btn-primary">
-              Download Master Index
-          </button>
-      </form>
-    </div>
+    <p>
+      <a href="{% url 'home:master_index' %}" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="symbol-link">View Master Index</a>
+    </p>
     <table>
       <thead>
         <tr>
@@ -192,7 +192,7 @@
             <td>{{ entry.book.title }}</td>
             <td>{{ entry.page }}</td>
             <td>{{ entry.term }}</td>
-            <td>{{ entry.description }}</td>
+            <td>{{ entry.description|linebreaksbr|safe }}</td>
             <td>{{ entry.created_at|date:"Y-m-d H:i" }}</td>
           </tr>
         {% endfor %}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Master Index</title>
+  <style>
+    /* General form styling */
+    form { margin-bottom: 2em; }
+    label { display: block; margin-bottom: 0.3em; font-weight: bold; }
+    select { width: 100%; max-width: 400px; }
+
+    /* Entries table styling */
+    table {
+      width: 100%; border-collapse: collapse; margin-top: 2em;
+    }
+    table th, table td {
+      border: 1px solid #ccc; padding: 0.5em; text-align: left;
+    }
+    table th { background: #f0f0f0; }
+
+    /* Inline form for delete & export buttons */
+    .action-form { display: inline; margin: 0; padding: 0; }
+    .action-form button {
+      background: none;
+      border: none;
+      color: #007BFF;
+      text-decoration: underline;
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+      margin-right: 0.5em;
+    }
+
+    /* Link styling */
+    .action-link { margin-right: 0.5em; }
+
+    /* Home link styling */
+    .home-link {
+      margin-bottom: 1em;
+      display: inline-block;
+      font-weight: bold;
+      text-decoration: none;
+      color: #007BFF;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+    <!-- Home link -->
+    <p>
+    <a href="http://127.0.0.1" class="home-link">&larr; Home</a>
+    </p>
+
+    {% if entries %}
+        <table>
+        <thead>
+        <tr>
+            <th>Book</th>
+            <th>Page</th>
+            <th>Term</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entry in entries %}
+        <tr>
+            <td>{{ entry.book.title }}</td>
+            <td>{{ entry.page }}</td>
+            <td>{{ entry.term }}</td>
+            <td>{{ entry.description|linebreaksbr|safe }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        <p>No entries found.</p>
+    {% endif %}
+
+</body>
+</html>

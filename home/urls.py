@@ -5,8 +5,9 @@ from .views import (homepage,
                     book_entries, 
                     edit_entry, 
                     delete_entry,
-                    export_to_csv,
-                    export_master_csv,
+                    export_book,
+                    master_index,
+                    export_master,
                     symbols,
                     planner)
 
@@ -25,14 +26,19 @@ urlpatterns = [
         name='delete_entry'
     ),
     path(
-        'entries/export/',
-        export_to_csv,
-        name='export_to_csv'
+        'entries/book/',
+        export_book,
+        name='export_book'
     ),
     path(
         'entries/master',
-        export_master_csv,
-        name='export_master_csv'
+        master_index,
+        name='master_index'
+    ),
+    path(
+        'entries/export_master',
+        export_master,
+        name='export_master'
     ),
     path(
         'symbols/',

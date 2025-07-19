@@ -145,7 +145,7 @@ def delete_entry(request, entry_id):
     url = f"{reverse('home:book_entries')}?book_id={book_id}"
     return redirect(url)
 
-def export_to_csv(request):
+def export_book(request):
     book_id = request.GET.get('book_id')
     if request.GET.get("export") == "csv" and book_id:
         try:
@@ -164,7 +164,14 @@ def export_to_csv(request):
     
     return redirect(f"{reverse('home:book_entries')}?book_id={book_id}")
 
-def export_master_csv(request):
+def master_index(request):
+    entries = IndexEntry.objects.select_related('book').order_by('term', 'book__title', 'page')
+
+    context = {'entries': entries}
+
+    return render(request, 'home/master_index.html', context)
+
+def export_master(request):
     if request.GET.get("export") == "csv":
         try:
             today_str = date.today().isoformat()

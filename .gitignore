@@ -1,3 +1,6 @@
+# Developer Tools
+build_webapp.sh
+
 # Python bytecode & cache
 *.py[cod]
 __pycache__/

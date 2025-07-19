@@ -75,10 +75,10 @@
     <h2>Entries for “{{ selected_book.title }}”</h2>
 
     <div class="actions">
-      <form action="{% url 'home:export_to_csv' %}" method="get">
+      <form action="{% url 'home:export_book' %}" method="get">
           <input type="hidden" name="book_id" value="{{ selected_book.id }}">
           <button type="submit" name="export" value="csv" class="btn btn-primary">
-              Download Index (CSV)
+              Download Individual Index
           </button>
       </form>
     </div>
