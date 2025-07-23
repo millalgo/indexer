@@ -1,5 +1,6 @@
 # Developer Tools
-build_webapp.sh
+dev_build_webapp.sh
+db_backups
 
 # Python bytecode & cache
 *.py[cod]
