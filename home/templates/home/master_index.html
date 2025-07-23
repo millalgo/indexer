@@ -4,6 +4,26 @@
   <meta charset="UTF-8">
   <title>View Master Index</title>
   <style>
+      :root {
+        --table-font-size: 0.7rem; /* Adjust this value as needed */
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2em;
+        font-size: var(--table-font-size);
+      }
+
+      table th, table td {
+        border: 1px solid #ccc;
+        padding: 0.5em;
+        text-align: left;
+      }
+
+      table th {
+        background: #f0f0f0;
+      }
     /* General form styling */
     form { margin-bottom: 2em; }
     label { display: block; margin-bottom: 0.3em; font-weight: bold; }

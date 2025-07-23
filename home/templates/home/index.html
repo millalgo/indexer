@@ -1,47 +1,104 @@
+<!-- Updated index.html
+     - Enlarged description textarea
+     - Moved textarea below the "Copy/Paste Symbols" link
+     - NEW: Made Terms input wider (full‑width)
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Manage Books &amp; Index</title>
   <style>
-    /* General form styling */
-    form { margin-bottom: 2em; }
+      :root {
+        --table-font-size: 0.9rem; /* Adjust this value as needed */
+      }
 
-    /* Entry form layout */
-    form.entry-form .form-group { margin-bottom: 1em; }
-    form.entry-form label {
-      display: block;
-      margin-bottom: 0.3em;
-      font-weight: bold;
-    }
-    form.entry-form input[type="number"] {
-      width: 100%; max-width: 200px;
-    }
-    form.entry-form input[type="text"] {
-      width: 100%; max-width: 400px;
-    }
-    form.entry-form textarea {
-      width: 100%; max-width: 600px;
-      height: 150px;
-    }
+      /* Table styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2em;
+        font-size: var(--table-font-size);
+      }
 
-    /* Recent entries table */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 2em;
-    }
-    table th, table td {
-      border: 1px solid #ccc;
-      padding: 0.5em;
-      text-align: left;
-    }
-    table th { background: #f0f0f0; }
-    .symbol-link{
-      display:block;         /* link below label, above textarea */
-      margin:0 0 .4em 0;     /* small spacer */
-    }
+      table th,
+      table td {
+        border: 1px solid #ccc;
+        padding: 0.5em;
+        text-align: left;
+      }
+
+      table th {
+        background: #f0f0f0;
+      }
+
+      /* General form styling */
+      form {
+        margin-bottom: 2em;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.3em;
+        font-weight: bold;
+      }
+
+      select {
+        width: 100%;
+        max-width: 400px;
+      }
+
+      /* Inline form for delete & export buttons */
+      .action-form {
+        display: inline;
+        margin: 0;
+        padding: 0;
+      }
+
+      .action-form button {
+        background: none;
+        border: none;
+        color: #007BFF;
+        text-decoration: underline;
+        cursor: pointer;
+        font: inherit;
+        padding: 0;
+        margin-right: 0.5em;
+      }
+
+      /* Link styling */
+      .action-link {
+        margin-right: 0.5em;
+      }
+
+      /* Home link styling */
+      .home-link {
+        margin-bottom: 1em;
+        display: inline-block;
+        font-weight: bold;
+        text-decoration: none;
+        color: #007BFF;
+      }
+
+      /* Symbol link & description textarea */
+      .symbol-link {
+        display: inline-block; /* Keeps link inline but allows margin */
+        margin-bottom: 0.5em;
+      }
+
+      /* NEW: Larger description area */
+      #id_description {
+        width: 75%;
+        min-height: 200px; /* Enlarged height */
+        resize: vertical; /* Allow user to resize vertically */
+      }
+
+      /* NEW: Wider terms input */
+      #id_terms {
+        width: 25%;
+      }
   </style>
+  <!-- MathJax for rendering math symbols -->
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 </head>
 <body>
@@ -142,18 +199,21 @@
 
       <div class="form-group">
         <label for="id_description">Description</label>
-
-        <a href="{% url 'home:symbols' %}" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="symbol-link">Copy/Paste Symbols Sheet</a>
         
+        <!-- Textarea enlarged & moved below link -->
         <textarea
           id="id_description"
           name="description"
           placeholder="Enter description (required)"
-          required
-        ></textarea>
+          required></textarea>
+      </div>
+
+      <div class="form-group">
+        <!-- Symbol reference link -->
+        <a href="{% url 'home:symbols' %}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="symbol-link">Copy/Paste Symbols Sheet</a>
       </div>
 
       <button type="submit">Add Entry</button>
