@@ -1,7 +1,7 @@
-<!-- Updated index.html
-     - Enlarged description textarea
-     - Moved textarea below the "Copy/Paste Symbols" link
-     - NEW: Made Terms input wider (full‑width)
+<!-- Updated index.html (Option A applied)
+     - MathJax configured so `$$ … $$` renders inline
+     - Removed table‑cell CSS workaround (no longer needed)
+     - Other previous UI tweaks retained (textarea size, wider terms field, etc.)
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -86,19 +86,28 @@
         margin-bottom: 0.5em;
       }
 
-      /* NEW: Larger description area */
+      /* Larger description area */
       #id_description {
         width: 75%;
         min-height: 200px; /* Enlarged height */
         resize: vertical; /* Allow user to resize vertically */
       }
 
-      /* NEW: Wider terms input */
+      /* Wider terms input */
       #id_terms {
         width: 25%;
       }
   </style>
-  <!-- MathJax for rendering math symbols -->
+
+  <!-- MathJax: treat $$ … $$ as inline, keep \[ \] for display -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$$', '$$'], ['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      }
+    };
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 </head>
 <body>
@@ -225,14 +234,14 @@
     <hr>
     <h2>5 Most Recent Entries</h2>
     <p>
-      <a href="{% url 'home:book_entries' %}" 
-        target="_blank" 
+      <a href="{% url 'home:book_entries' %}"
+        target="_blank"
         rel="noopener noreferrer"
         class="symbol-link">View all entries by book</a>
     </p>
     <p>
-      <a href="{% url 'home:master_index' %}" 
-        target="_blank" 
+      <a href="{% url 'home:master_index' %}"
+        target="_blank"
         rel="noopener noreferrer"
         class="symbol-link">View Master Index</a>
     </p>
