@@ -159,7 +159,7 @@
             <tr>
               <td>{{ entry.page }}</td>
               <td>{{ entry.term }}</td>
-              <td>{{ entry.description }}</td>
+              <td>{{ entry.description|linebreaksbr|safe }}</td>
               <td>
                 <a
                   href="{% url 'home:edit_entry' entry.id %}"
